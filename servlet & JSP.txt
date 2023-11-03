@@ -1,0 +1,334 @@
+JSP:
+
+1. jsp stands for java server pages
+2. jsp is a server side technology
+3. jsp is used to create dynamic web content
+4. jsp tags are used to insert java code into html pages
+5. jsp has access to entire API of java
+6. jsp are extended version of servlet.
+
+Servlet : 
+
+servlet work on the server-side 
+servlet are capable of handling complex request obtained from the web server and able to process it 
+
+servlet as written in java are platform independent
+
+servlet is simple java program that runs on server and capable of handling request and generating dynamic responce.
+
+java 
+
+Desktop app--> swing , javafx
+Web app---> servlet, jsp, spring(Framwork)
+distributed ---> spring boot(Framwork)
+
+
+Create Servlet : 
+
+3 ways 
+
+1. using Servlet interface
+2. using GenericServlet class
+3. using HttpServlet class 
+
+
+1. create Servlet using Servlet interface
+
+1. javax.servlet.Servlet
+2. must be overide all the method
+3. 5 methods in Servlet interface
+
+Life Cycle Method 👍
+1. public void init(ServletConfig config);
+2. public void service(ServiceRequest request,ServletResponse response);
+3. public void destroy();
+
+Non Life Cycle Method 👍
+4. public ServletConfig getServletConfig();
+5. public String getServletInfo();
+
+Deploy in server 
+web.xml-Deployment descriptor
+url mapping : www.something.com/register
+
+
+2. using GenericServlet class
+
+servlet program---->extends ---> GenericServlet
+
+3. using HttpServlet class 
+
+it provide http specific methods such as doGet, doPost, doHead, toTrace etc
+
+Servlet Life Cycle
+the entire life cycle of servlet is managed by the servlet container
+mainly goes through four stages
+1. Loading Servlet
+2. Initializing the servlet
+3. Request handling
+4. Destroying the servlet
+
+
+start--------------------->Loading 
+                              |
+                              |
+                            Initialization
+                              |
+                              |
+                            Handling Request
+                              |
+                              |
+  End of Life Cycle <--------End    
+
+
+  Welcome file list?
+  is used to define a list of welcome files.
+  a welcome file is invoked automatically by server.
+
+  Request Dispatcher?
+  the Request Dispatcher interface provide the facility of Dispatching the request to another resource 
+  it may be html,servlet or jsp. 
+
+  there are two methods defined in the interface.
+  1. forword() 2. include()
+
+
+  1. forword()
+user ------>servlet1 ----- forword()----->servlet2 
+ |                                          |
+ |                                          |
+ |                                          |
+  <--------------------------------------response  
+            final response
+
+2. include()
+
+user ------>servlet1 ----->servlet2 
+                     <------     
+ |              |
+ |              |
+ |              |
+ <---------------  
+            response
+
+
+Session Tracking?
+session simply means a particular interval of time.
+session tracking is a way to maintain state(data) of an user. it also known as session management in servlet.
+
+user---->http------>servlet program(server)
+
+Session tracking techniques used in session tracking.
+1. cookies
+2. Hidden form fields
+3. URL Rewritting
+4. HttpSession
+
+
+Cookies ?
+
+is a session tracking techniques which used to maintain stage, used in the client side, defined in key value pair,
+cookies class present in javax.servlet.http package.
+
+Login form using Cookies
+index.html(login Form )-----> home.class(profile page)
+
+
+
+JSP .. ?(Java Server pages)
+1.JSP technology is used to create web application.
+2.JSP is an extention to Servlet because it provides more functionality than the servlet as expression language,JSTL
+3.A JSP pages consist of html tags and jsp tags
+4.the JSP Pages are easier to maintain than servlet because we can seperate designing
+and development
+5.it provide some addtional features such as expression language,custome tags etc.
+
+request------>server
+response<----servlet
+
+Advantages?
+1.extention to servlet : we can use all the features of the Servlet in JSP. in addtional we can use implicit object,
+predefined tags, etc..
+2.Easy to maintain
+3.Fast Developement:no need to recompile and redeploy.
+4.Less code than Servlet.
+
+JSP Scripting Element?
+the Scripting element provides the ability to insert java code inside the jsp.
+there are three types of scripting elements.
+
+1.Declaration tag <%! int a=10; String name="coder"; public void show(){}  %>    
+2.expression tag  <%= a %>  <%= name %>
+3.Scripting tag   <%    req.getParameter(); %>
+
+Page & Include Directive?
+
+the jsp Directive are messages that tells the web container how to translate jsp page
+into the corresponding servlet.
+
+three types of Directive
+1.page Directive
+2.include Directive
+3.taglib Directive
+
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+syntax of page Directive
+<%@ page attribute="value" %>
+
+attributes : import,contentType,extention,info,buffer,language,session..etc
+
+
+JSP Implicit objects?
+
+there are 9 jsp implicit objects. these objects are created by the web container 
+ that are available to all the jsp pages.
+ 1.out,2.request,3.response,4.config,5.application,6.pageContext,7.session,8.page,9.exception.
+
+ 1.JSP out object : for writing any data to buffer,
+ PrintWriter out = response.getWriter();
+ In jsp : <% out.print("hello world"); %>
+
+ 2. JSP request implicit object: created for each jsp request by the web container.
+ it can be used to get request information such as parameter, header
+
+ 3. JSP response implicit object: it can be used to add or manipulate response such as 
+ redirect response to another resource.
+ <% response.sendRedirect("http://www.google.com"); %>
+
+ 4. JSP config implicit object: it is used to get Initialization parameter from the web.xml file.
+<% String name = config.getinitparameter("dname");
+out.print("driver name is = "+name);
+%>
+
+ 5. JSP application implicit object: this object can be used to get Initialization parameter from configuration
+ file(web.xml) . it can also be used to get set or remove attribute from the application scope.
+
+<% String name = application.getinitparameter("dname");
+out.print("driver name is = "+name);
+%>
+
+ 6. JSP session implicit object: this is use for state management i.e object to set,get or remove attribute 
+ or to get session information.
+
+7. JSP pageContext implicit object: this is use for  set,get or remove attribute from one of the following scope
+page,request ,session,application.
+
+8. JSP page implicit object: this object is assigned to the reference of auto generated reference servlet class.
+
+9. JSP exception implicit object: this object can be used to print the exception. but it can be only used in 
+error pages.
+
+<% exception %>
+
+Redirection in JSP?
+
+page1.jsp-->page2.jsp-->page3.jsp
+login.jsp--->home.jsp
+
+response.sendRedirect("page3.jsp");
+HttpServletResponse response;
+
+
+JSTL?
+
+the JSP Standard Tag Library represent a set of tags to simplify the JSP Developement.
+Advantages?
+1.fast development,JSTL provides many tags that simplify jsp
+2.code reusability, we can use the JSTL tags on variaous pages.
+3.no need to use scriptlet tag, it avoide the use of scriptlet tag.
+
+JSTL tags
+mainly provide five types of tags
+1.Core tags
+2.Function tags
+3.Formatting tags
+4.XML tags
+5.SQL tags
+
+
+JSTL Core tags 👍
+
+core tags provide variable support. URL management, flow control,
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+Maveen Repository : https://mvnrepository.com/
+
+
+1. c:out = it display the result of an expression
+2. c:import = it retriving ralative or absplute url
+3. c:set = it sets of an expression under evaluation in scope variable.
+4. c:remove = remove scoped variable.
+5. c:catch = it is used for catches any throwable exceptions.
+6. c:if = it is condtional tags used for testing the condtions.
+7. c:choose,c:when,c:otherwise = it is the simple condtional tags.
+8. c:forEach = it is the basic iteration tag.
+9. c:forTokens = it iterate over tokens which is seperated by the supllied delemeter.
+10. c:param = it ads the parameter.
+11. c:redirect = 
+12. c:url = 
+
+JSTL Function Tags:
+
+it provide a number of standard functions.
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+1.fn.contains()
+2.fn.containsignoreCase()
+3.fn.endsWith()
+4.fn.escapeXml()
+5.fn.indexOf()
+6.fn.trim()
+7.fn.split()
+8.fn.toLowerCase()
+9.fn.toUpperCase()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
